@@ -23,6 +23,7 @@ ndk() {
 	wget -nv "https://dl.google.com/android/repository/$1" -P "$TMP"
 	unzip -o "$TMP/$1"
 	export ANDROID_NDK="$HOME/${1%-linux-*.zip}"
+	echo >> .profile
 	echo "export ANDROID_NDK=$ANDROID_NDK" >> .profile
 }
 
@@ -60,3 +61,31 @@ case "$NDK_VERSION" in
 		exit 1
 		;;
 esac
+
+
+# Android SDK
+# Set environment variables
+echo >> .profile
+export ANDROID_SDK="$HOME/android-sdk"
+echo "export ANDROID_SDK=$ANDROID_SDK" >> .profile
+export PATH="$PATH:$ANDROID_SDK/tools/bin:$ANDROID_SDK/platform-tools"
+echo 'export PATH=$PATH:$ANDROID_SDK/tools/bin:$ANDROID_SDK/platform-tools:$ANDROID_NDK/build-tools/26.0.0' >> .profile
+
+# Android SDK
+wget -nv https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip -P "$TMP"
+mkdir -p "$ANDROID_SDK"
+unzip -o -d "$ANDROID_SDK" "$TMP/sdk-tools-linux-3859397.zip"
+
+# Silence useless warning
+mkdir -p "$HOME/.android"
+touch "$HOME/.android/repositories.cfg"
+
+# Accept licenses
+yes | sdkmanager --licenses
+
+# Update Android SDK
+sdkmanager --update
+
+# Install all the things
+PACKAGES="$(sdkmanager --list --verbose 2> /dev/null | grep -P '^(build-tools|platforms)' | tr '\n' ' ')"
+sdkmanager $PACKAGES
