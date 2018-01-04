@@ -52,6 +52,9 @@ case "$NDK_VERSION" in
 	15)
 		ndk android-ndk-r15c-linux-x86_64.zip
 		;;
+	16)
+		ndk android-ndk-r16b-linux-x86_64.zip
+		;;
 	"")
 		echo "FATAL: no NDK_VERSION specified"
 		exit 1

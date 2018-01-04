@@ -28,6 +28,7 @@ Version | NDK Revision
 13 | 13b
 14 | 14b
 15 | 15c
+16 | 16b
 
 ## Building
 * `make` in the root directory will build all boxes.
