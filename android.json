@@ -1,6 +1,7 @@
 {
   "variables": {
-    "version": "17.04",
+    "cloud_token": "{{env `ATLAS_TOKEN`}}",
+    "version": "1.0.{{timestamp}}",
     "codename": "zesty",
     "arch": "amd64",
     "disk_size": "102400",
@@ -12,7 +13,7 @@
       "type": "qemu",
       "iso_url": "http://archive.ubuntu.com/ubuntu/dists/{{user `codename`}}/main/installer-{{user `arch`}}/current/images/netboot/mini.iso",
       "iso_checksum_type": "none",
-      "output_directory": "tmp/ubuntu-{{user `version`}}-{{user `arch`}}-android-ndk-{{user `ndk_version`}}",
+      "output_directory": "tmp/ubuntu-{{user `codename`}}-{{user `arch`}}-android-ndk-{{user `ndk_version`}}",
       "shutdown_command": "shutdown -P now",
       "shutdown_timeout": "10m",
       "disk_size": "{{user `disk_size`}}",
@@ -30,7 +31,7 @@
       "ssh_password": "vagrant",
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
-      "vm_name": "ubuntu-{{user `codename`}}-android-ndk-{{user `ndk_version`}}",
+      "vm_name": "android-ndk-{{user `ndk_version`}}",
       "net_device": "virtio-net",
       "disk_interface": "virtio",
       "boot_wait": "5s",
@@ -48,6 +49,12 @@
       "include": [
         "include/android-sdk.sh"
       ]
+    },
+    {
+      "type": "vagrant-cloud",
+      "box_tag": "Phoenix09/android-ndk-{{user `ndk_version`}}",
+      "access_token": "{{user `cloud_token`}}",
+      "version": "{{user `version`}}"
     }
   ],
   "provisioners": [

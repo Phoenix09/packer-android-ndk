@@ -86,6 +86,23 @@ yes | sdkmanager --licenses
 # Update Android SDK
 sdkmanager --update
 
-# Install all the things
+# Install build-tools, platforms, and Android extras
+# We can't install everything here because licensing for some components doesn't permit redistribution
 PACKAGES="$(sdkmanager --list --verbose 2> /dev/null | grep -P '^(build-tools|platforms)' | tr '\n' ' ')"
+sdkmanager $PACKAGES 'extras;android;m2repository'
+
+# Add a script to update everything
+# We won't enable this by default, if you want to you can add it as a provisioner:
+#	Vagrant.configure("2") do |config|
+#	  config.vm.provision "shell",
+#	    inline: "$HOME/sdk-update.sh"
+#	end
+cat << 'EOF' >> $HOME/sdk-update.sh
+#!/bin/sh
+sdkmanager --update
+PACKAGES="$(sdkmanager --list --verbose 2> /dev/null | grep -P '^(build-tools|platforms|extras)' | tr '\n' ' ')"
 sdkmanager $PACKAGES
+EOF
+
+chmod +x $HOME/sdk-update.sh
+
