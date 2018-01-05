@@ -41,21 +41,23 @@
     }
   ],
   "post-processors": [
-    {
-      "type": "vagrant",
-      "keep_input_artifact": false,
-      "vagrantfile_template": "include/Vagrantfile.in",
-      "output": "output/ubuntu-{{user `codename`}}-android-ndk-{{user `ndk_version`}}.box",
-      "include": [
-        "include/android-sdk.sh"
-      ]
-    },
-    {
-      "type": "vagrant-cloud",
-      "box_tag": "Phoenix09/android-ndk-{{user `ndk_version`}}",
-      "access_token": "{{user `cloud_token`}}",
-      "version": "{{user `version`}}"
-    }
+    [
+      {
+        "type": "vagrant",
+        "keep_input_artifact": false,
+        "vagrantfile_template": "include/Vagrantfile.in",
+        "output": "output/ubuntu-{{user `codename`}}-android-ndk-{{user `ndk_version`}}.box",
+        "include": [
+          "include/android-sdk.sh"
+        ]
+      },
+      {
+        "type": "vagrant-cloud",
+        "box_tag": "Phoenix09/android-ndk-{{user `ndk_version`}}",
+        "access_token": "{{user `cloud_token`}}",
+        "version": "{{user `version`}}"
+      }
+    ]
   ],
   "provisioners": [
     {
