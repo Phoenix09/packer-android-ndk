@@ -31,5 +31,5 @@ Version | NDK Revision
 16 | 16b
 
 ## Building
-* `make` in the root directory will build all boxes.
+* `make all` in the root directory will build all boxes.
 * `make help` will show available targets.
