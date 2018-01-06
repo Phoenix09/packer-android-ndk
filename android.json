@@ -46,10 +46,7 @@
         "type": "vagrant",
         "keep_input_artifact": false,
         "vagrantfile_template": "include/Vagrantfile.in",
-        "output": "output/ubuntu-{{user `codename`}}-android-ndk-{{user `ndk_version`}}.box",
-        "include": [
-          "include/android-sdk.sh"
-        ]
+        "output": "output/ubuntu-{{user `codename`}}-android-ndk-{{user `ndk_version`}}.box"
       },
       {
         "type": "vagrant-cloud",
