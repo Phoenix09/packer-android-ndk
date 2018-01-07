@@ -2,7 +2,8 @@
 * Android NDK
 * Android SDK with build-tools and APIs installed
     * Other components are not preinstalled due to licensing restrictions.
-     You can install them manually using `sdkmanager` or use the `sdk-update.sh` script which will update existing packages and install extras:
+     You can install them manually using `sdkmanager`.
+    * The included `sdk-update.sh` script will update existing packages and install new platforms and build-tools:
         ```ruby
         Vagrant.configure("2") do |config|
           config.vm.provision "shell",
@@ -18,7 +19,7 @@
 ```shell
 vagrant init Phoenix09/android-ndk-VERSION
 ```
-Where version is a supported NDK version:
+Where VERSION is a supported NDK version:
 Version | NDK Revision
 --------|--------
 9 | 9d
