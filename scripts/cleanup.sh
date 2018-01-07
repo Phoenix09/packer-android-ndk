@@ -1,5 +1,8 @@
 #!/bin/sh
 set -e
+echo "Removing unneeded packages..."
+apt-get autoremove --purge
+
 printf "Cleaning APT package cache... "
 apt-get clean
 echo "done."
