@@ -1,9 +1,10 @@
 ## Features
 * Android NDK
 * Android SDK with build-tools and APIs installed
-    * Other components are not preinstalled due to licensing restrictions.
-     You can install them manually using `sdkmanager`.
-    * The included `sdk-update.sh` script will update existing packages and install new platforms and build-tools:
+    * Other components are not preinstalled due to licensing restrictions.  
+      You can install them manually using `sdkmanager`.
+    * The included `sdk-update.sh` script will update existing packages and install new platforms and build-tools.  
+      You can add it as a provisioner like so:
         ```ruby
         Vagrant.configure("2") do |config|
           config.vm.provision "shell",
