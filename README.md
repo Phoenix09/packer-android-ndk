@@ -20,6 +20,7 @@
 vagrant init Phoenix09/android-ndk-VERSION
 ```
 Where VERSION is a supported NDK version:
+
 Version | NDK Revision
 --------|--------
 9 | 9d
