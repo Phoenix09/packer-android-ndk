@@ -92,7 +92,7 @@ sdkmanager --update
 # Install build-tools, platforms, and Android extras
 # We can't install everything here because licensing for some components doesn't permit redistribution
 PACKAGES="$(sdkmanager --list --verbose 2> /dev/null | grep -P '^(build-tools|platforms)' | tr '\n' ' ')"
-sdkmanager $PACKAGES 'extras;android;m2repository'
+sdkmanager $PACKAGES
 
 # Add a script to update everything
 # We won't enable this by default, if you want to you can add it as a provisioner:
@@ -103,7 +103,7 @@ sdkmanager $PACKAGES 'extras;android;m2repository'
 cat << 'EOF' >> $HOME/sdk-update.sh
 #!/bin/sh
 sdkmanager --update
-PACKAGES="$(sdkmanager --list --verbose 2> /dev/null | grep -P '^(build-tools|platforms|extras)' | tr '\n' ' ')"
+PACKAGES="$(sdkmanager --list --verbose 2> /dev/null | grep -P '^(build-tools|platforms)' | tr '\n' ' ')"
 sdkmanager $PACKAGES
 EOF
 
