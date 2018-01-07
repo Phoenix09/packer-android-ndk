@@ -87,12 +87,12 @@ touch "$HOME/.android/repositories.cfg"
 yes | sdkmanager --licenses
 
 # Update Android SDK
-sdkmanager --update
+sdkmanager --update --verbose
 
 # Install build-tools, platforms, and Android extras
 # We can't install everything here because licensing for some components doesn't permit redistribution
 PACKAGES="$(sdkmanager --list --verbose 2> /dev/null | grep -P '^(build-tools|platforms)' | tr '\n' ' ')"
-sdkmanager $PACKAGES
+sdkmanager --verbose $PACKAGES
 
 # Add a script to update everything
 # We won't enable this by default, if you want to you can add it as a provisioner:
@@ -102,9 +102,9 @@ sdkmanager $PACKAGES
 #	end
 cat << 'EOF' >> $HOME/sdk-update.sh
 #!/bin/sh
-sdkmanager --update
+sdkmanager --update --verbose
 PACKAGES="$(sdkmanager --list --verbose 2> /dev/null | grep -P '^(build-tools|platforms)' | tr '\n' ' ')"
-sdkmanager $PACKAGES
+sdkmanager --verbose $PACKAGES
 EOF
 
 chmod +x $HOME/sdk-update.sh
