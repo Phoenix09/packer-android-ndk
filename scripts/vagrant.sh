@@ -23,4 +23,6 @@ chown -R vagrant:vagrant /home/vagrant/.ssh
 
 # Install nfs-common for shared folders
 apt-get install -y nfs-common 
-apt-get clean
+
+# Install qemu guest agent
+apt-get install -y qemu-guest-agent
