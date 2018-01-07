@@ -13,7 +13,7 @@
         end
         ```
 * Preinstalled packages:
-    * unzip openjdk-8-jdk-headless git python autoconf automake ant autopoint cmake build-essential libtool patch pkg-config ragel subversion wget
+    * unzip openjdk-8-jdk-headless git python autoconf automake ant autopoint cmake build-essential libtool patch pkg-config qemu-guest-agent ragel subversion wget
     * protoc v3.3.0
 
 ## Usage
