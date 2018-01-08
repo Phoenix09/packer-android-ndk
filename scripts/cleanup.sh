@@ -28,8 +28,19 @@ SWAP_FILE="$(awk '$2 == "file" { print $1 }' /proc/swaps)"
 if [ -n "$SWAP_FILE" ]; then
 	echo "Zeroing swap file..."
 	swapoff "$SWAP_FILE"
-	SWAP_SIZE="$(stat --printf='%s' /swapfile)"
-	dd if=/dev/zero of="$SWAP_FILE" bs=1 count="$SWAP_SIZE" || true
+	SWAP_SIZE="$(stat --printf='%s' "$SWAP_FILE")"
+	BS=1
+	if [ "$(($SWAP_SIZE%1048576))" = "0" ]; then
+		BS=1M
+		SWAP_SIZE="$(($SWAP_SIZE/1048576))"
+	elif [ "$(($SWAP_SIZE%524288))" = "0" ]; then
+		BS=512K
+		SWAP_SIZE="$(($SWAP_SIZE/524288))"
+	elif [ "$(($SWAP_SIZE%512))" = "0" ]; then
+		BS=512
+		SWAP_SIZE="$(($SWAP_SIZE/512))"
+	fi
+	dd if=/dev/zero of="$SWAP_FILE" bs="$BS" count="$SWAP_SIZE" || true
 	mkswap -f "$SWAP_FILE"
 fi
 
