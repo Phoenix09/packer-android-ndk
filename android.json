@@ -4,7 +4,7 @@
     "version": "1.0.{{timestamp}}",
     "codename": "zesty",
     "arch": "amd64",
-    "disk_size": "102400",
+    "disk_size": "40960",
     "ndk_version": ""
   },
   "builders": [
